@@ -12,6 +12,7 @@ module.exports = {
           "@config": "./src/config",
           "@constants": "./src/constants",
           "@routes": "./src/routes",
+          "@services": "./src/services",
           "@state": "./src/state",
           "@utils": "./src/utils",
           "@typings": "./src/types",

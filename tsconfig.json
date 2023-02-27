@@ -36,6 +36,7 @@
       "@components/*": ["src/components/*"],
       "@config": ["./src/config"],
       "@routes/*": ["src/routes/*"],
+      "@services/*": ["src/services/*"],
       "@state/*": ["src/state/*"],
       "@utils/*": ["src/utils/*"],
       "@typings/*": ["src/types/*"]

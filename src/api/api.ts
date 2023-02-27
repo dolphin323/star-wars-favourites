@@ -1,15 +1,15 @@
-import DeviceInfo from 'react-native-device-info';
-import axios, { AxiosRequestConfig } from 'axios';
-import { config } from '@config';
-import { isJWTValid } from '@utils/jwt';
+import DeviceInfo from "react-native-device-info";
+import axios, { AxiosRequestConfig } from "axios";
+import { config } from "@config";
+import { isJWTValid } from "@utils/jwt";
 
 const CONFIG: AxiosRequestConfig = {
   headers: {
-    Authorization: '',
-    accept: 'application/json',
-    'Accept-Language': 'en',
-    'X-App-Version': DeviceInfo.getVersion(),
-    'X-Platform': `${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`,
+    Authorization: "",
+    accept: "application/json",
+    "Accept-Language": "en",
+    "X-App-Version": DeviceInfo.getVersion(),
+    "X-Platform": `${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`,
   },
 };
 export class Api {
@@ -27,7 +27,7 @@ export class Api {
 
   static setLanguage = (language: string) => {
     if (Api.Config.headers) {
-      Api.Config.headers['Accept-Language'] = language;
+      Api.Config.headers["Accept-Language"] = language;
     }
   };
 
@@ -41,13 +41,12 @@ export class Api {
   // Helpers
   static get = async <T>(
     endpoint: string,
-    params?: { [key in string]: string | number },
-  ) => {
+    params?: { [key in string]: string | number }
+  ): Promise<any> => {
     await Api.checkJWT();
     const url = config.BASE_URL + endpoint;
 
-    return (await axios.get<{ data: T }>(url, { ...Api.Config, params })).data
-      .data;
+    return (await axios.get<{ data: T }>(url, { ...Api.Config, params })).data;
   };
 
   static post = async <D, T>(endpoint: string, data: D, checkJWT = true) => {
