@@ -12,7 +12,7 @@ Mobile application based on React Native for iOS & Android platforms that gives 
 
 ## Managing locales
 
-We're currently using [i18next](https://www.i18next.com/) with [react-i18next](https://react.i18next.com/).
+In the current app [i18next](https://www.i18next.com/) is used with [react-i18next](https://react.i18next.com/).
 
 Changing language is easy:
 
