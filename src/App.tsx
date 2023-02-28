@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import Navigator from "./routes/navigator";
 import { configStore } from "./state/store";
+import { AppColor } from "@utils/style";
 
 const { store, persistor } = configStore();
 export { store };
@@ -23,7 +24,7 @@ const App = memo(() => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <View style={{ backgroundColor: "#f6f6f6", flex: 1 }}>
+          <View style={{ backgroundColor: AppColor.BACKGROUND.GRAY, flex: 1 }}>
             <Navigator />
           </View>
         </GestureHandlerRootView>

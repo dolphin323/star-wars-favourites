@@ -42,10 +42,8 @@ const CharacterRow = memo(
         onPress={() => handleCharacterPressed(id)}
       >
         <View>
-          <Text style={{ color: "#2c1b69", fontWeight: "bold", fontSize: 16 }}>
-            {character.name}
-          </Text>
-          <Text style={{ color: "#2c1b69" }}>{character.gender}</Text>
+          <Text style={styles.characterName}>{character.name}</Text>
+          <Text style={styles.characterGender}>{character.gender}</Text>
         </View>
         <TouchableOpacity
           style={styles.iconWrapper}

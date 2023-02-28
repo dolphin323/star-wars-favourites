@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { AppColor } from "@utils/style";
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,6 +8,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "grey",
   },
   transparent: {
-    backgroundColor: "transparent",
+    backgroundColor: AppColor.BACKGROUND.TRANSPARENT,
   },
 });

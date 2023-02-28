@@ -1,3 +1,5 @@
+import React, { FC } from "react";
+import { useWindowDimensions } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import {
   BackdropFilter,
@@ -8,8 +10,7 @@ import {
   rrect,
   vec,
 } from "@shopify/react-native-skia";
-import React, { FC } from "react";
-import { useWindowDimensions } from "react-native";
+import { AppColor } from "@utils/style";
 
 import { Ball } from "./components/ball";
 
@@ -46,10 +47,10 @@ const Glassmorphism: FC = () => {
         flex: 1,
         width,
         height: height - headerHeight,
-        backgroundColor: "#f6f6f6",
+        backgroundColor: AppColor.BACKGROUND.GRAY,
       }}
     >
-      <Fill color={"#f6f6f6"} />
+      <Fill color={AppColor.BACKGROUND.GRAY} />
       {CIRCLES.map((circle) => {
         return <Ball circle={circle} key={circle.id} />;
       })}

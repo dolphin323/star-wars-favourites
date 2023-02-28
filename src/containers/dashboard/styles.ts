@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
+import { AppColor, FontSize } from "@utils/style";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#c9c1dc",
+    backgroundColor: AppColor.BACKGROUND.PASTEL_VIOLET,
   },
-  title: { fontSize: 30 },
+  title: { fontSize: FontSize.EXTRA_LARGE },
   contentContainer: {
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
   totalFavouriteContainer: {
     width: "32%",
-    backgroundColor: "#ebebeb",
+    backgroundColor: AppColor.BACKGROUND.PASTEL_WHITE,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -45,16 +46,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   totalFavouriteNumber: {
-    color: "#343434",
+    color: AppColor.TEXT.LIGHT_GREY,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: FontSize.BIG,
   },
   totalFavouriteLabel: {
-    color: "#343434",
+    color: AppColor.TEXT.LIGHT_GREY,
   },
   charactersWrapper: {
     padding: 10,
-    backgroundColor: "#e9e5fb",
+    backgroundColor: AppColor.BACKGROUND.VOILET,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -66,13 +67,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 10,
   },
+  characterName: {
+    color: AppColor.TEXT.VIOLET,
+    fontWeight: "bold",
+    fontSize: FontSize.BASE,
+  },
+  characterGender: {
+    color: AppColor.TEXT.VIOLET,
+  },
   iconWrapper: { width: 20, height: 20 },
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  pageLabel: { fontSize: 18 },
+  pageLabel: { fontSize: FontSize.BIG },
 });
 
 export { styles };

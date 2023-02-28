@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { AppColor, FontSize } from "@utils/style";
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   contentWrapper: {
-    backgroundColor: "#f6f6f6",
+    backgroundColor: AppColor.BACKGROUND.GRAY,
     height: "100%",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -27,14 +28,19 @@ const styles = StyleSheet.create({
     top: -40,
     alignSelf: "center",
   },
-  name: { alignSelf: "center", marginTop: 10, fontSize: 20, color: "white" },
+  name: {
+    alignSelf: "center",
+    marginTop: 10,
+    fontSize: FontSize.BIG,
+    color: AppColor.TEXT.WHITE,
+  },
   glassmorphismContainer: {
     width: "100%",
     position: "absolute",
     height: "100%",
   },
   characterInfoWrapper: {
-    backgroundColor: "transparent",
+    backgroundColor: AppColor.BACKGROUND.TRANSPARENT,
     padding: 10,
     borderRadius: 10,
     paddingBottom: 0,
@@ -49,11 +55,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   labelCharacterInfo: {
-    fontSize: 16,
+    fontSize: FontSize.BASE,
     textTransform: "capitalize",
-    color: "white",
+    color: AppColor.TEXT.WHITE,
   },
-  valueCharacterInfo: { fontSize: 16, color: "white" },
+  valueCharacterInfo: { fontSize: FontSize.BASE, color: AppColor.TEXT.WHITE },
   buttonsContainer: { flexDirection: "row", justifyContent: "space-between" },
 });
 
