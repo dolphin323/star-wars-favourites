@@ -1,22 +1,21 @@
 import React, { useEffect } from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, ScrollView, View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import Heart from "@assets/icon/heart.svg";
 import { DefaultButton, Loader } from "@components/index";
 import { actions } from "@state/actions";
 import { RootState } from "@state/reducers";
-import { navigate } from "@utils/navigation";
-import { Route } from "@routes/route-names";
 
 import { styles } from "./styles";
 import { getCharacterId } from "@utils/character";
+import { Gender } from "@services/domains/character/types";
+import { CharacterRow } from "./components/characterRow";
+
+const favouritesByGenderTitle = {
+  [Gender.FEMALE]: "Female Fans",
+  [Gender.MALE]: "Male Fans",
+  [Gender.OTHER]: "Others",
+};
 
 const Dashboard: React.FC = () => {
   const {
@@ -24,6 +23,7 @@ const Dashboard: React.FC = () => {
     currentPage,
     isNextPage,
     favouritesCharacterIds,
+    totalFavouriteCharactersByGender,
     isLoading,
   } = useSelector((state: RootState) => state.character);
   const dispatch = useDispatch();
@@ -40,25 +40,50 @@ const Dashboard: React.FC = () => {
     dispatch(actions.character.getCharacters({ page: currentPage - 1 }));
   };
 
-  const handleCharacterPressed = (id: string) => {
-    dispatch(actions.character.getCharacterById({ id }));
-    navigate(Route.Character);
-  };
-
-  const handleAddToFavouritePressed = (id: string) => {
-    dispatch(actions.character.addIdToFavourite({ id }));
-  };
-
-  const handleRemoveFromFavouritePressed = (id: string) => {
-    dispatch(actions.character.removeIdFromFavourite({ id }));
+  const handleClearFavouritePressed = () => {
+    dispatch(actions.character.removeAllFavourite());
   };
 
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <ScrollView
+          contentContainerStyle={{ paddingHorizontal: 15 }}
+          contentInsetAdjustmentBehavior="automatic"
+        >
           <View>
-            <Text>Fans</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text>Fans</Text>
+              <DefaultButton
+                title="Clear fans"
+                onPress={handleClearFavouritePressed}
+              />
+            </View>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              {Object.keys(totalFavouriteCharactersByGender).map(function (
+                key
+              ) {
+                return (
+                  <View
+                    key={key}
+                    style={{ borderWidth: 1, borderRadius: 10, padding: 10 }}
+                  >
+                    <Text>
+                      {totalFavouriteCharactersByGender[key as Gender]}
+                    </Text>
+                    <Text>{favouritesByGenderTitle[key as Gender]}</Text>
+                  </View>
+                );
+              })}
+            </View>
             <View>
               {isLoading && <Loader isTransparentBg style={styles.loader} />}
               {characters.map((character) => {
@@ -67,27 +92,11 @@ const Dashboard: React.FC = () => {
                   (favouriteId) => id === favouriteId
                 );
                 return (
-                  <View key={id} style={styles.characterRow}>
-                    <TouchableOpacity
-                      onPress={() => handleCharacterPressed(id)}
-                    >
-                      <Text>{character.name}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.iconWrapper}
-                      onPress={() =>
-                        isFavourite
-                          ? handleRemoveFromFavouritePressed(id)
-                          : handleAddToFavouritePressed(id)
-                      }
-                    >
-                      <Heart
-                        width="100%"
-                        height="100%"
-                        fill={isFavourite ? "red" : "none"}
-                      />
-                    </TouchableOpacity>
-                  </View>
+                  <CharacterRow
+                    id={id}
+                    character={character}
+                    isFavourite={isFavourite}
+                  />
                 );
               })}
             </View>

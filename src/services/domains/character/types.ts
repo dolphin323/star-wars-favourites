@@ -1,3 +1,9 @@
+enum Gender {
+  FEMALE = "female",
+  MALE = "male",
+  OTHER = "n/a",
+}
+
 interface Character {
   name: string;
   height: string;
@@ -6,7 +12,7 @@ interface Character {
   skin_color: string;
   eye_color: string;
   birth_year: string;
-  gender: string;
+  gender: Gender;
   homeworld: string;
   films: string[];
   species: string[];
@@ -23,4 +29,4 @@ interface GetCharactersPage {
   results: Character[];
 }
 
-export { GetCharactersPage, Character };
+export { GetCharactersPage, Character, Gender };

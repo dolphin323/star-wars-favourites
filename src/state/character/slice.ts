@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Character } from "@services/domains/character/types";
+import { Character, Gender } from "@services/domains/character/types";
+
+const INITIAL_TOTAL_FAVOURITE_CHARACTERS_BY_GENDER = {
+  [Gender.FEMALE]: 0,
+  [Gender.MALE]: 0,
+  [Gender.OTHER]: 0,
+};
 
 export const INITIAL_STATE: CharacterReducerState = {
   isLoading: false,
@@ -8,6 +14,8 @@ export const INITIAL_STATE: CharacterReducerState = {
   isNextPage: true,
   currentCharacter: null,
   favouritesCharacterIds: [],
+  totalFavouriteCharactersByGender:
+    INITIAL_TOTAL_FAVOURITE_CHARACTERS_BY_GENDER,
 };
 
 export interface CharacterReducerState {
@@ -17,6 +25,9 @@ export interface CharacterReducerState {
   isNextPage: boolean;
   currentCharacter: Character | null;
   favouritesCharacterIds: string[];
+  totalFavouriteCharactersByGender: {
+    [key in Gender]: number;
+  };
 }
 
 export const characterSlice = createSlice({
@@ -36,28 +47,40 @@ export const characterSlice = createSlice({
       state.isLoading = isLoading;
     },
 
-    addIdToFavourite: (
+    addFavourite: (
       state,
       action: PayloadAction<{
         id: string;
+        gender: Gender;
       }>
     ) => {
-      const { id } = action.payload;
+      const { id, gender } = action.payload;
 
       state.favouritesCharacterIds = [...state.favouritesCharacterIds, id];
+      state.totalFavouriteCharactersByGender[gender] =
+        state.totalFavouriteCharactersByGender[gender] + 1;
     },
 
-    removeIdFromFavourite: (
+    removeFavourite: (
       state,
       action: PayloadAction<{
         id: string;
+        gender: Gender;
       }>
     ) => {
-      const { id } = action.payload;
+      const { id, gender } = action.payload;
 
       state.favouritesCharacterIds = state.favouritesCharacterIds.filter(
         (favouriteId) => id !== favouriteId
       );
+      state.totalFavouriteCharactersByGender[gender] =
+        state.totalFavouriteCharactersByGender[gender] - 1;
+    },
+
+    removeAllFavourite: (state) => {
+      state.favouritesCharacterIds = [];
+      state.totalFavouriteCharactersByGender =
+        INITIAL_TOTAL_FAVOURITE_CHARACTERS_BY_GENDER;
     },
 
     setCharacters: (

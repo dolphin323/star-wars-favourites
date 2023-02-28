@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   characterRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    borderWidth: 2,
+    marginVertical: 5,
+    padding: 10,
   },
   iconWrapper: { width: 20, height: 20 },
   buttonsContainer: { flexDirection: "row", justifyContent: "space-between" },

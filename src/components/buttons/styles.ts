@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   wrapper: {
     borderRadius: 6,
-    backgroundColor: "red",
-    marginTop: 32,
+    backgroundColor: "gray",
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
