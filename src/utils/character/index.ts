@@ -1,1 +1,0 @@
-export { getCharacterId } from "./getCharacterId";

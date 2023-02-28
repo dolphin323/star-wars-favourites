@@ -47,7 +47,13 @@ const Navigator = () => {
 
   return (
     <NavigationContainer ref={navigationRef} onStateChange={onRouteChange}>
-      <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTitle: "",
+        }}
+      >
         <Stack.Screen
           name={Route.Dashboard}
           component={Dashboard}

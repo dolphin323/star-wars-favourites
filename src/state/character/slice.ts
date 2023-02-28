@@ -57,8 +57,13 @@ export const characterSlice = createSlice({
       const { id, gender } = action.payload;
 
       state.favouritesCharacterIds = [...state.favouritesCharacterIds, id];
-      state.totalFavouriteCharactersByGender[gender] =
-        state.totalFavouriteCharactersByGender[gender] + 1;
+      if (gender !== Gender.FEMALE && gender !== Gender.MALE) {
+        state.totalFavouriteCharactersByGender[Gender.OTHER] =
+          state.totalFavouriteCharactersByGender[Gender.OTHER] + 1;
+      } else {
+        state.totalFavouriteCharactersByGender[gender] =
+          state.totalFavouriteCharactersByGender[gender] + 1;
+      }
     },
 
     removeFavourite: (
@@ -73,8 +78,14 @@ export const characterSlice = createSlice({
       state.favouritesCharacterIds = state.favouritesCharacterIds.filter(
         (favouriteId) => id !== favouriteId
       );
-      state.totalFavouriteCharactersByGender[gender] =
-        state.totalFavouriteCharactersByGender[gender] - 1;
+
+      if (gender !== Gender.FEMALE && gender !== Gender.MALE) {
+        state.totalFavouriteCharactersByGender[Gender.OTHER] =
+          state.totalFavouriteCharactersByGender[Gender.OTHER] - 1;
+      } else {
+        state.totalFavouriteCharactersByGender[gender] =
+          state.totalFavouriteCharactersByGender[gender] - 1;
+      }
     },
 
     removeAllFavourite: (state) => {

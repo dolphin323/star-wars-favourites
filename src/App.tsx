@@ -23,7 +23,7 @@ const App = memo(() => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <View style={{ backgroundColor: "#f6f5f3", flex: 1 }}>
+          <View style={{ backgroundColor: "#f6f6f6", flex: 1 }}>
             <Navigator />
           </View>
         </GestureHandlerRootView>

@@ -3,12 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   wrapper: {
     borderRadius: 6,
-    backgroundColor: "gray",
     paddingVertical: 10,
     paddingHorizontal: 15,
+    backgroundColor: "transparent",
+    borderColor: "black",
+    borderWidth: 1,
   },
   title: {
-    color: "white",
+    color: "black",
     fontSize: 20,
     fontWeight: "600",
     textAlign: "center",

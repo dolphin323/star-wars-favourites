@@ -8,7 +8,7 @@ interface DefaultButtonProps {
   disabled?: boolean;
 }
 
-export const DefaultButton: React.FC<DefaultButtonProps> = ({
+const DefaultButton: React.FC<DefaultButtonProps> = ({
   onPress,
   title,
   disabled = false,
@@ -21,3 +21,5 @@ export const DefaultButton: React.FC<DefaultButtonProps> = ({
     <Text style={styles.title}>{title}</Text>
   </TouchableOpacity>
 );
+
+export { DefaultButton };
