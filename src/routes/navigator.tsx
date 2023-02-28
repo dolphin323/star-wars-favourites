@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { BackHandler } from "react-native";
 import { NavigationContainer, NavigationState } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Character } from "@containers/character";
 
 import { getActiveRouteName, navigationRef } from "../utils/navigation";
 import { Dashboard } from "../containers/dashboard";
@@ -46,12 +47,13 @@ const Navigator = () => {
 
   return (
     <NavigationContainer ref={navigationRef} onStateChange={onRouteChange}>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name={Route.Dashboard} component={Dashboard} />
+      <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+        <Stack.Screen
+          name={Route.Dashboard}
+          component={Dashboard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name={Route.Character} component={Character} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -7,6 +7,7 @@ import { RootState } from "@state/reducers";
 
 export function* characterSagas() {
   yield* takeLatest(actions.character.getCharacters.type, getCharacters);
+  yield* takeLatest(actions.character.getCharacterById.type, getCharacterById);
 }
 
 function* getCharacters({
@@ -20,9 +21,30 @@ function* getCharacters({
 
     yield* put(
       actions.character.setCharacters({
-        currentCharacters: characters.results,
+        characters: characters.results,
         currentPage: page,
         isNextPage: !!characters.next,
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  } finally {
+    yield* put(actions.character.setLoading({ isLoading: false }));
+  }
+}
+
+function* getCharacterById({
+  payload: { id },
+}: ActionFromCreator<typeof actions.character.getCharacterById>) {
+  yield* put(actions.character.setLoading({ isLoading: true }));
+  try {
+    const character = yield* call(CharacterApiDomain.getById, {
+      id,
+    });
+
+    yield* put(
+      actions.character.setCurrentCharacter({
+        character,
       })
     );
   } catch (e) {

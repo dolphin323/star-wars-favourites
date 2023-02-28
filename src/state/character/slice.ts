@@ -4,15 +4,17 @@ import { Character } from "@services/domains/character/types";
 export const INITIAL_STATE: CharacterReducerState = {
   isLoading: false,
   currentPage: 1,
-  currentCharacters: [],
+  characters: [],
   isNextPage: true,
+  currentCharacter: null,
 };
 
 export interface CharacterReducerState {
   isLoading: boolean;
   currentPage: number;
-  currentCharacters: Character[];
+  characters: Character[];
   isNextPage: boolean;
+  currentCharacter: Character | null;
 }
 
 export const characterSlice = createSlice({
@@ -33,22 +35,40 @@ export const characterSlice = createSlice({
     setCharacters: (
       state,
       action: PayloadAction<{
-        currentCharacters: Character[];
+        characters: Character[];
         currentPage: number;
         isNextPage: boolean;
       }>
     ) => {
-      const { currentCharacters, currentPage, isNextPage } = action.payload;
+      const { characters, currentPage, isNextPage } = action.payload;
 
-      state.currentCharacters = currentCharacters;
+      state.characters = characters;
       state.currentPage = currentPage;
       state.isNextPage = isNextPage;
+    },
+
+    setCurrentCharacter: (
+      state,
+      action: PayloadAction<{
+        character: Character;
+      }>
+    ) => {
+      const { character } = action.payload;
+
+      state.currentCharacter = character;
     },
 
     getCharacters: (
       state,
       action: PayloadAction<{
         page: number;
+      }>
+    ) => state,
+
+    getCharacterById: (
+      state,
+      action: PayloadAction<{
+        id: string;
       }>
     ) => state,
   },

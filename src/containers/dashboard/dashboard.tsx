@@ -1,15 +1,24 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, ScrollView, View, Text } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import { DefaultButton, Loader } from "@components/index";
 import { actions } from "@state/actions";
 import { RootState } from "@state/reducers";
+import { navigate } from "@utils/navigation";
+import { Route } from "@routes/route-names";
 
 import { styles } from "./styles";
+import { getCharacterId } from "@utils/character";
 
 const Dashboard: React.FC = () => {
-  const { currentCharacters, currentPage, isNextPage, isLoading } = useSelector(
+  const { characters, currentPage, isNextPage, isLoading } = useSelector(
     (state: RootState) => state.character
   );
   const dispatch = useDispatch();
@@ -26,6 +35,11 @@ const Dashboard: React.FC = () => {
     dispatch(actions.character.getCharacters({ page: currentPage - 1 }));
   };
 
+  const handleCharacterPressed = (id: string) => {
+    dispatch(actions.character.getCharacterById({ id }));
+    navigate(Route.Character);
+  };
+
   return (
     <>
       <SafeAreaView>
@@ -34,8 +48,16 @@ const Dashboard: React.FC = () => {
             <Text>Fans</Text>
             <View>
               {isLoading && <Loader isTransparentBg style={styles.loader} />}
-              {currentCharacters.map((character, index) => {
-                return <Text key={index}>{character.name}</Text>;
+              {characters.map((character, index) => {
+                const id = getCharacterId(character.url);
+                return (
+                  <TouchableOpacity
+                    onPress={() => handleCharacterPressed(id)}
+                    key={id}
+                  >
+                    <Text>{character.name}</Text>
+                  </TouchableOpacity>
+                );
               })}
             </View>
             <View style={styles.buttonsContainer}>
