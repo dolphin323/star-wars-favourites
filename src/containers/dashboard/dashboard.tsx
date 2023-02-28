@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
+import Heart from "@assets/icon/heart.svg";
 import { DefaultButton, Loader } from "@components/index";
 import { actions } from "@state/actions";
 import { RootState } from "@state/reducers";
@@ -18,9 +19,13 @@ import { styles } from "./styles";
 import { getCharacterId } from "@utils/character";
 
 const Dashboard: React.FC = () => {
-  const { characters, currentPage, isNextPage, isLoading } = useSelector(
-    (state: RootState) => state.character
-  );
+  const {
+    characters,
+    currentPage,
+    isNextPage,
+    favouritesCharacterIds,
+    isLoading,
+  } = useSelector((state: RootState) => state.character);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,23 +45,49 @@ const Dashboard: React.FC = () => {
     navigate(Route.Character);
   };
 
+  const handleAddToFavouritePressed = (id: string) => {
+    dispatch(actions.character.addIdToFavourite({ id }));
+  };
+
+  const handleRemoveFromFavouritePressed = (id: string) => {
+    dispatch(actions.character.removeIdFromFavourite({ id }));
+  };
+
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View>
             <Text>Fans</Text>
             <View>
               {isLoading && <Loader isTransparentBg style={styles.loader} />}
-              {characters.map((character, index) => {
+              {characters.map((character) => {
                 const id = getCharacterId(character.url);
+                const isFavourite = favouritesCharacterIds.some(
+                  (favouriteId) => id === favouriteId
+                );
                 return (
-                  <TouchableOpacity
-                    onPress={() => handleCharacterPressed(id)}
-                    key={id}
-                  >
-                    <Text>{character.name}</Text>
-                  </TouchableOpacity>
+                  <View key={id} style={styles.characterRow}>
+                    <TouchableOpacity
+                      onPress={() => handleCharacterPressed(id)}
+                    >
+                      <Text>{character.name}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.iconWrapper}
+                      onPress={() =>
+                        isFavourite
+                          ? handleRemoveFromFavouritePressed(id)
+                          : handleAddToFavouritePressed(id)
+                      }
+                    >
+                      <Heart
+                        width="100%"
+                        height="100%"
+                        fill={isFavourite ? "red" : "none"}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 );
               })}
             </View>

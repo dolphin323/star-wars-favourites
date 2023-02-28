@@ -7,6 +7,7 @@ export const INITIAL_STATE: CharacterReducerState = {
   characters: [],
   isNextPage: true,
   currentCharacter: null,
+  favouritesCharacterIds: [],
 };
 
 export interface CharacterReducerState {
@@ -15,6 +16,7 @@ export interface CharacterReducerState {
   characters: Character[];
   isNextPage: boolean;
   currentCharacter: Character | null;
+  favouritesCharacterIds: string[];
 }
 
 export const characterSlice = createSlice({
@@ -22,6 +24,7 @@ export const characterSlice = createSlice({
   name: "character",
   reducers: {
     clearState: () => INITIAL_STATE,
+
     setLoading: (
       state,
       action: PayloadAction<{
@@ -32,6 +35,31 @@ export const characterSlice = createSlice({
 
       state.isLoading = isLoading;
     },
+
+    addIdToFavourite: (
+      state,
+      action: PayloadAction<{
+        id: string;
+      }>
+    ) => {
+      const { id } = action.payload;
+
+      state.favouritesCharacterIds = [...state.favouritesCharacterIds, id];
+    },
+
+    removeIdFromFavourite: (
+      state,
+      action: PayloadAction<{
+        id: string;
+      }>
+    ) => {
+      const { id } = action.payload;
+
+      state.favouritesCharacterIds = state.favouritesCharacterIds.filter(
+        (favouriteId) => id !== favouriteId
+      );
+    },
+
     setCharacters: (
       state,
       action: PayloadAction<{
