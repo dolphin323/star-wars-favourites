@@ -1,6 +1,5 @@
 import createSagaMiddleware from "redux-saga";
-import { applyMiddleware, compose, createStore } from "redux";
-import { compact } from "lodash";
+import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { Reactotron } from "reactotron-core-client";
 import { ReactotronReactNative } from "reactotron-react-native";
@@ -13,9 +12,9 @@ import { rootSaga } from "./sagas";
 import { storage } from "../utils/storage";
 
 const persistorConfig = {
-  key: "@GreatnessApp:state",
+  key: "@Starwars:root",
   storage,
-  whitelist: ["character"],
+  whitelist: [],
 };
 
 declare global {
@@ -41,14 +40,18 @@ export const configStore = (initialState?: PersistedAppState) => {
   }
 
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
-  const middlewares = [];
 
-  middlewares.push(sagaMiddleware);
-  const appliedMiddleware = applyMiddleware(sagaMiddleware);
-
-  const enhancers = compose(...compact([appliedMiddleware, reactorEnhancer]));
+  const enhancers = [];
+  if (reactorEnhancer) {
+    enhancers.push(reactorEnhancer);
+  }
   const persistedReducer = persistReducer(persistorConfig, rootReducer);
-  const store = createStore(persistedReducer, initialState, enhancers as any);
+  const store = configureStore({
+    reducer: persistedReducer,
+    enhancers: enhancers,
+    middleware: [sagaMiddleware],
+    preloadedState: initialState as any,
+  });
   const persistor = persistStore(store);
 
   sagaMiddleware.run(rootSaga);

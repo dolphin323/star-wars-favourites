@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
     totalFavouriteCharactersByGender,
     isLoading,
   } = useSelector((state: RootState) => state.character);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
