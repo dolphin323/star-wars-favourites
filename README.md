@@ -7,8 +7,12 @@ Mobile application based on React Native for iOS & Android platforms that gives 
 ## How to start the app
 
 1. Run `yarn install` at the root folder
-2. Start Metro: `yarn start`
-3. Start the app:`yarn android` or `yarn ios`
+2. Run `yarn pod-install` for ios app
+3. Start Metro: `yarn start`
+4. Start the app, 2 ways:
+
+- `yarn android` or `yarn ios`
+- press `i` or `a` in terminal
 
 ## Statements
 
