@@ -1,10 +1,8 @@
 import { AnyAction, CombinedState, combineReducers } from "redux";
 
-import { AppReducerState, appSlice } from "./app/slice";
 import { CharacterReducerState, characterSlice } from "./character/slice";
 
 export interface RootState {
-  app: AppReducerState;
   character: CharacterReducerState;
 }
 
@@ -13,7 +11,6 @@ export interface PersistedAppState extends RootState {
 }
 
 const combinedReducer = combineReducers<CombinedState<RootState>>({
-  app: appSlice.reducer,
   character: characterSlice.reducer,
 });
 

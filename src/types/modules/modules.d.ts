@@ -1,7 +1,7 @@
 /* eslint-disable no-var */
 // noinspection ES6ConvertVarToLetConst
 
-declare module 'reactotron-react-native/dist/flipper';
+declare module "reactotron-react-native/dist/flipper";
 
 declare namespace globalThis {
   var width: number;
@@ -13,5 +13,4 @@ declare namespace globalThis {
   var isIOS: boolean;
   var hasNotch: boolean;
   var brand: string;
-  var localeId: string;
 }

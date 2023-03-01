@@ -10,22 +10,6 @@ Mobile application based on React Native for iOS & Android platforms that gives 
 2. Start Metro: `yarn start`
 3. Start the app:`yarn android` or `yarn ios`
 
-## Managing locales
-
-In the current app [i18next](https://www.i18next.com/) is used with [react-i18next](https://react.i18next.com/).
-
-Changing language is easy:
-
-```
-import { locale } from 'src/utils/locale';
-
-const languageHandler = (lang) => {
-    locale.changeLanguage(lang);
-}
-```
-
-Locale config can be found in `src/utils/locale/`. Language files are located at `src/assets/locale/`.
-
 ## Statements
 
 - Make an API Request to get the information from the server.

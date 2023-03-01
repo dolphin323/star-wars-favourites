@@ -7,11 +7,8 @@ interface EnabledFeatureProps {
 }
 
 interface Features {
-  analytics: boolean;
   branch: boolean;
   reactotron: boolean;
-  sentry: boolean;
-  localization: boolean;
 }
 
 export const getEnabledFeatures = ({
@@ -21,9 +18,6 @@ export const getEnabledFeatures = ({
   production,
   development,
 }: EnabledFeatureProps): Features => ({
-  analytics: !sysDev && (stage || production),
   branch: !sysDev && (production || stage),
   reactotron: sysDev && (development || stage || production || test),
-  sentry: !sysDev && (stage || production),
-  localization: false,
 });

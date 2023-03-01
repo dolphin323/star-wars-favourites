@@ -3,12 +3,12 @@ import RNBootSplash from "react-native-bootsplash";
 import { Provider } from "react-redux";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { View } from "react-native";
-
 import { PersistGate } from "redux-persist/integration/react";
+
+import { AppColor } from "@utils/style";
 
 import Navigator from "./routes/navigator";
 import { configStore } from "./state/store";
-import { AppColor } from "@utils/style";
 
 const { store, persistor } = configStore();
 export { store };
