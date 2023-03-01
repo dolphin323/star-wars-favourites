@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
+  characterRowWrapper: { flexGrow: 1, flexShrink: 1, paddingRight: 5 },
   characterRow: {
     flexDirection: "row",
     justifyContent: "space-between",

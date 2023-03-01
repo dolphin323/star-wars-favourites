@@ -58,8 +58,14 @@ const styles = StyleSheet.create({
     fontSize: FontSize.BASE,
     textTransform: "capitalize",
     color: AppColor.TEXT.WHITE,
+    width: "30%",
   },
-  valueCharacterInfo: { fontSize: FontSize.BASE, color: AppColor.TEXT.WHITE },
+  valueCharacterInfo: {
+    fontSize: FontSize.BASE,
+    color: AppColor.TEXT.WHITE,
+    width: "70%",
+    textAlign: "right",
+  },
   buttonsContainer: { flexDirection: "row", justifyContent: "space-between" },
 });
 

@@ -41,7 +41,7 @@ const CharacterRow = memo(
         style={styles.characterRow}
         onPress={() => handleCharacterPressed(id)}
       >
-        <View>
+        <View style={styles.characterRowWrapper}>
           <Text style={styles.characterName}>{character.name}</Text>
           <Text style={styles.characterGender}>{character.gender}</Text>
         </View>
